@@ -23,5 +23,7 @@ public interface TestService extends IService<Test> {
 
     IPage<Test> findPage(String name,Page<Test> page);
 
+    IPage<TestDTO> findPageDTO(String name,Page<Test> page);
+
     IPage<Test>  selectPage1(@Param("name") String name, Page<Test> page);
 }

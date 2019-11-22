@@ -23,6 +23,8 @@ public interface TestMapper extends BaseMapper<Test> {
 
     IPage<Test> findPage(Page page,@Param("name") String name);
 
+    IPage<TestDTO> findPageDTO(Page page,@Param("name") String name);
+
     @Select("SELECT * FROM pf_test WHERE name like '%${name}%'")
     IPage<Test> selectPage1(Page<Test> page,@Param("name") String name);
 }

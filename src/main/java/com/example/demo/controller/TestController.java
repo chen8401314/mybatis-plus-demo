@@ -28,6 +28,13 @@ public class TestController {
     @Autowired
     private TestService testService;
 
+    @ApiOperation(value = "保存test")
+    @PostMapping(value = "/save")
+    public Response<String> save(@RequestBody Test test) {
+        testService.save(test);
+        return Response.instance.success();
+    }
+
     @ApiOperation(value = "获取test")
     @GetMapping(value = "/findAll")
     public Response<List<Test>> findAll() {
@@ -65,5 +72,16 @@ public class TestController {
     ) {
         Page<Test> page = new Page(pages,size);
         return Response.instance.success(testService.findPage(name,page));
+    }
+
+    @ApiOperation(value = "获取pagetestDTO")
+    @GetMapping(value = "/findPageDTO")
+    public Response<IPage<TestDTO>> findPageDTO(
+            @RequestParam(required = false) Integer pages,
+            @RequestParam(required = false) Integer size,
+            @RequestParam(required = false) String name
+    ) {
+        Page<Test> page = new Page(pages,size);
+        return Response.instance.success(testService.findPageDTO(name,page));
     }
 }

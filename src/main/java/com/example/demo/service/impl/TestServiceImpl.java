@@ -34,6 +34,11 @@ public class TestServiceImpl extends ServiceImpl<TestMapper, Test> implements Te
     }
 
     @Override
+    public IPage<TestDTO> findPageDTO(String name,Page<Test> page) {
+        return testMapper.findPageDTO(page,name);
+    }
+
+    @Override
     public IPage<Test> selectPage(String name,Page<Test> page) {
         QueryWrapper<Test> qw = new QueryWrapper<>();
         qw.likeRight("name",name);

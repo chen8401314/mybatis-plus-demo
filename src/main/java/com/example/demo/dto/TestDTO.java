@@ -8,4 +8,6 @@ public class TestDTO {
     private String id;
 
     private String name;
+
+    private String depName;
 }
