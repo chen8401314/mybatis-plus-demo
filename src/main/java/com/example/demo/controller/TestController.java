@@ -9,6 +9,7 @@ import com.example.demo.entity.Test;
 import com.example.demo.mapper.TestMapper;
 import com.example.demo.service.TestService;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/test")
+@Slf4j
 public class TestController {
     @Autowired
     private TestService testService;
@@ -38,6 +40,10 @@ public class TestController {
     @ApiOperation(value = "获取test")
     @GetMapping(value = "/findAll")
     public Response<List<Test>> findAll() {
+        log.debug("debug测试");
+        log.info("info测试");
+        log.warn("warn测试");
+        log.error("error测试");
         return Response.instance.success(testService.list());
     }
 
