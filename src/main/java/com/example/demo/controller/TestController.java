@@ -34,7 +34,7 @@ public class TestController {
     @PostMapping(value = "/save")
     public Response<String> save(@RequestBody Test test) {
         testService.save(test);
-        return Response.instance.success();
+        return Response.success();
     }
 
     @ApiOperation(value = "获取test")
@@ -44,7 +44,7 @@ public class TestController {
         log.info("info测试");
         log.warn("warn测试");
         log.error("error测试");
-        return Response.instance.success(testService.list());
+        return Response.success(testService.list());
     }
 
     @ApiOperation(value = "获取pagetest")
@@ -55,7 +55,7 @@ public class TestController {
             @RequestParam(required = false) String name
     ) {
         Page<Test> page = new Page(pages,size);
-        return Response.instance.success(testService.selectPage(name,page));
+        return Response.success(testService.selectPage(name,page));
     }
 
     @ApiOperation(value = "获取pagetest")
@@ -66,7 +66,7 @@ public class TestController {
             @RequestParam(required = false) String name
     ) {
         Page<Test> page = new Page(pages,size);
-        return Response.instance.success(testService.selectPage1(name,page));
+        return Response.success(testService.selectPage1(name,page));
     }
 
     @ApiOperation(value = "获取pagetest")
@@ -77,7 +77,7 @@ public class TestController {
             @RequestParam(required = false) String name
     ) {
         Page<Test> page = new Page(pages,size);
-        return Response.instance.success(testService.findPage(name,page));
+        return Response.success(testService.findPage(name,page));
     }
 
     @ApiOperation(value = "获取pagetestDTO")
@@ -88,6 +88,6 @@ public class TestController {
             @RequestParam(required = false) String name
     ) {
         Page<Test> page = new Page(pages,size);
-        return Response.instance.success(testService.findPageDTO(name,page));
+        return Response.success(testService.findPageDTO(name,page));
     }
 }

@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 /**
  * 该接口是一个泛型类接口 该接口必须实现序列化接口的实体类作为泛型实际参数
@@ -12,13 +14,9 @@ import java.io.Serializable;
  */
 public class Response<T> implements Serializable {
 
-    public static final Response instance = new Response();
-
     private static final long serialVersionUID = -8524609179308474508L;
 
-    public static final String DEFAULT_MESSAGE_SUCCESS = "ok";
-
-    public static final String DEFAULT_MESSAGE_FAILURE = "failure";
+    public static final String DEFAULT_MESSAGE_SUCCESS = "操作成功";
 
     public static final int DEFAULT_CODE_SUCCESS = 200;
 
@@ -33,8 +31,12 @@ public class Response<T> implements Serializable {
     @Getter
     @Setter
     private T data;
+    @Getter
+    @Setter
+    private ZonedDateTime timestamp = ZonedDateTime.now(ZoneId.of("UTC"));
 
-    private Response() {
+
+    public Response() {
     }
 
     private Response(int code, String message, T data) {
@@ -53,9 +55,8 @@ public class Response<T> implements Serializable {
      * @param data
      * @return
      */
-    public Response success(T data) {
-        Response response = new Response(DEFAULT_CODE_SUCCESS, DEFAULT_MESSAGE_SUCCESS, data);
-        return response;
+    public static <T> Response<T> success(T data) {
+        return new Response<>(DEFAULT_CODE_SUCCESS, DEFAULT_MESSAGE_SUCCESS, data);
     }
 
     /**
@@ -63,27 +64,15 @@ public class Response<T> implements Serializable {
      *
      * @return
      */
-    public Response success() {
-        Response response = new Response(DEFAULT_CODE_SUCCESS, DEFAULT_MESSAGE_SUCCESS);
-        return response;
-    }
-
-    /**
-     * 系统默认失败
-     *
-     * @return
-     */
-    public Response failure() {
-        Response response = new Response(DEFAULT_CODE_FAILURE, DEFAULT_MESSAGE_FAILURE);
-        return response;
+    public static <T> Response<T> success() {
+        return new Response<>(DEFAULT_CODE_SUCCESS, DEFAULT_MESSAGE_SUCCESS);
     }
 
     /**
      * 系统默认失败 ,失败并设置message
      */
-    public Response failure(String message) {
-        Response response = new Response(DEFAULT_CODE_FAILURE, message);
-        return response;
+    public static <T> Response<T> failure(String message) {
+        return new Response<>(DEFAULT_CODE_FAILURE, message);
     }
 
     /**
@@ -92,9 +81,8 @@ public class Response<T> implements Serializable {
      * @param message
      * @return
      */
-    public Response failure(int code, String message) {
-        Response response = new Response(code, message);
-        return response;
+    public static <T> Response<T> failure(int code, String message) {
+        return new Response<>(code, message);
     }
 
     /**
@@ -104,9 +92,8 @@ public class Response<T> implements Serializable {
      * @param message
      * @return
      */
-    public Response success(int code, String message) {
-        Response response = new Response(code, message);
-        return response;
+    public static <T> Response<T> success(int code, String message) {
+        return new Response<>(code, message);
     }
 
     /**
@@ -117,9 +104,8 @@ public class Response<T> implements Serializable {
      * @param data
      * @return
      */
-    public Response success(int code, String message, T data) {
-        Response response = new Response(code, message, data);
-        return response;
+    public static <T> Response<T> success(int code, String message, T data) {
+        return new Response<>(code, message, data);
     }
 
     /**
@@ -130,10 +116,26 @@ public class Response<T> implements Serializable {
      * @param data
      * @return
      */
-    public Response failure(int code, String message, T data) {
-        Response response = new Response(code, message, data);
-        return response;
+    public static <T> Response<T> failure(int code, String message, T data) {
+        return new Response<>(code, message, data);
     }
 
+    /**
+     * 返回的Response有效
+     *
+     * @return
+     */
+    public boolean isValid() {
+        return this.code == DEFAULT_CODE_SUCCESS;
+    }
+
+    /**
+     * 返回的Response无效
+     *
+     * @return
+     */
+    public boolean isNotValid() {
+        return !this.isValid();
+    }
 
 }
