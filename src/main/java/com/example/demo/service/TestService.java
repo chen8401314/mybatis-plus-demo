@@ -2,12 +2,10 @@ package com.example.demo.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.demo.dto.TestDTO;
-import com.example.demo.entity.Test;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.demo.dto.TestDTO;
+import com.example.demo.entity.TestEntity;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 /**
  * <p>
@@ -17,13 +15,13 @@ import java.util.List;
  * @author chenx
  * @since 2019-11-21
  */
-public interface TestService extends IService<Test> {
+public interface TestService extends IService<TestEntity> {
 
-    IPage<Test> selectPage(String name,Page<Test> page);
+    IPage<TestEntity> selectPage(String name,Page<TestEntity> page);
 
-    IPage<Test> findPage(String name,Page<Test> page);
+    IPage<TestEntity> findPage(String name,Page<TestEntity> page);
 
-    IPage<TestDTO> findPageDTO(String name,Page<Test> page);
+    IPage<TestDTO> findPageDTO(String name,Page<TestEntity> page);
 
-    IPage<Test>  selectPage1(@Param("name") String name, Page<Test> page);
+    IPage<TestDTO>  selectPage1(String name, Page<TestDTO> page);
 }

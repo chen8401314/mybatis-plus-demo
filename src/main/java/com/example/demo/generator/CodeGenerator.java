@@ -30,6 +30,7 @@ public class CodeGenerator {
         //实体属性 Swagger2 注解
         gc.setSwagger2(true);
         gc.setServiceName("%sService");
+        gc.setEntityName("%sEntity");
         gc.setBaseResultMap(true);
         mpg.setGlobalConfig(gc);
 
@@ -67,7 +68,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                return projectPath + "/src/main/resources/mapper/" + tableInfo.getMapperName() + StringPool.DOT_XML;
             }
         });
         /*

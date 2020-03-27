@@ -9,5 +9,5 @@ public class TestDTO {
 
     private String name;
 
-    private String depName;
+    private Boolean isMarry;
 }

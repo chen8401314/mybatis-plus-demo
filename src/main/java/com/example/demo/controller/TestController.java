@@ -5,8 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.common.Response;
 import com.example.demo.dto.TestDTO;
-import com.example.demo.entity.Test;
-import com.example.demo.mapper.TestMapper;
+import com.example.demo.entity.TestEntity;
 import com.example.demo.service.TestService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -32,51 +31,47 @@ public class TestController {
 
     @ApiOperation(value = "保存test")
     @PostMapping(value = "/save")
-    public Response<String> save(@RequestBody Test test) {
+    public Response<String> save(@RequestBody TestEntity test) {
         testService.save(test);
         return Response.success();
     }
 
     @ApiOperation(value = "获取test")
     @GetMapping(value = "/findAll")
-    public Response<List<Test>> findAll() {
-        log.debug("debug测试");
-        log.info("info测试");
-        log.warn("warn测试");
-        log.error("error测试");
+    public Response<List<TestEntity>> findAll() {
         return Response.success(testService.list());
     }
 
     @ApiOperation(value = "获取pagetest")
     @GetMapping(value = "/selectPage")
-    public Response<IPage<Test>> selectPage(
+    public Response<IPage<TestEntity>> selectPage(
             @RequestParam(required = false) Integer pages,
             @RequestParam(required = false) Integer size,
             @RequestParam(required = false) String name
     ) {
-        Page<Test> page = new Page(pages,size);
+        Page<TestEntity> page = new Page(pages,size);
         return Response.success(testService.selectPage(name,page));
     }
 
     @ApiOperation(value = "获取pagetest")
     @GetMapping(value = "/selectPage1")
-    public Response<IPage<Test>> selectPage1(
+    public Response<IPage<TestDTO>> selectPage1(
             @RequestParam(required = false) Integer pages,
             @RequestParam(required = false) Integer size,
             @RequestParam(required = false) String name
     ) {
-        Page<Test> page = new Page(pages,size);
+        Page<TestDTO> page = new Page(pages,size);
         return Response.success(testService.selectPage1(name,page));
     }
 
     @ApiOperation(value = "获取pagetest")
     @GetMapping(value = "/findPage")
-    public Response<IPage<Test>> findPage(
+    public Response<IPage<TestEntity>> findPage(
             @RequestParam(required = false) Integer pages,
             @RequestParam(required = false) Integer size,
             @RequestParam(required = false) String name
     ) {
-        Page<Test> page = new Page(pages,size);
+        Page<TestEntity> page = new Page(pages,size);
         return Response.success(testService.findPage(name,page));
     }
 
@@ -87,7 +82,7 @@ public class TestController {
             @RequestParam(required = false) Integer size,
             @RequestParam(required = false) String name
     ) {
-        Page<Test> page = new Page(pages,size);
+        Page<TestEntity> page = new Page(pages,size);
         return Response.success(testService.findPageDTO(name,page));
     }
 }
