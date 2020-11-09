@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.TestMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.TestEntity">
+        <id column="id" property="id" />
+        <result column="create_time" property="createTime" />
+        <result column="age" property="age" />
+        <result column="birthday" property="birthday" />
+        <result column="name" property="name" />
+        <result column="sex" property="sex" />
+        <result column="department" property="department" />
+        <result column="home_address" property="homeAddress" />
+        <result column="event_status" property="eventStatus" />
+        <result column="is_marry" property="isMarry" />
+    </resultMap>
+
+    <select id="findPage"  resultType="com.example.demo.entity.TestEntity">
+        SELECT * FROM pf_test WHERE  1=1
+        <if test="name!=null and name!=''">
+            AND name = #{name}
+        </if>
+    </select>
+
+    <select id="findPageDTO"  resultType="com.example.demo.dto.TestDTO">
+        SELECT id,name,is_marry FROM pf_test WHERE  1=1
+        <if test="name!=null and name!=''">
+            AND name = #{name}
+        </if>
+    </select>
+
+</mapper>

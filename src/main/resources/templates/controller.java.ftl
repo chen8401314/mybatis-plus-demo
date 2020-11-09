@@ -14,7 +14,7 @@ import ${superControllerClassPackage};
 
 /**
  * <p>
- * ${table.comment!} 前端控制器
+ * ${table.comment!}
  * </p>
  *
  * @author ${author}
@@ -26,6 +26,7 @@ import ${superControllerClassPackage};
 @Controller
 </#if>
 @RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
+@Slf4j
 <#if kotlin>
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>
