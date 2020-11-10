@@ -1,5 +1,6 @@
 package com.example.demo.util;
 
+import com.example.demo.common.ExceptionEnum;
 import com.example.demo.context.CommonException;
 import com.example.demo.context.ServiceContext;
 import com.example.demo.context.ThreadLocalContextAccessor;
@@ -71,7 +72,7 @@ public class JWTUtils {
             flag = parseToken(claimsJws).getBody() != null;
         } catch (Exception e) {
             log.warn("Error in validating token：{}", e.getMessage());
-            throw new CommonException(401, "Please login", e, 401);
+            throw new CommonException(ExceptionEnum.NOT_LOGIN.getMessage());
         }
         return flag;
     }
@@ -82,11 +83,11 @@ public class JWTUtils {
             claims = parseToken(claimsJws).getBody();
         } catch (Exception e) {
             log.warn("Error in validating token：{}", e.getMessage());
-            throw new CommonException(401, "Please login", e, 401);
+            throw new CommonException(ExceptionEnum.NOT_LOGIN.getMessage());
         }
 
         if (StringUtils.isEmpty(claims.getId())) {
-            throw new CommonException(401, "id is empty", null, 401);
+            throw new CommonException(ExceptionEnum.NOT_LOGIN.getMessage());
         }
 
         UserToken.UserTokenBuilder builder = UserToken.builder();
