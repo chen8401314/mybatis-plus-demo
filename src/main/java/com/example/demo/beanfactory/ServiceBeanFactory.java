@@ -7,13 +7,13 @@ import com.example.demo.handler.DefaultServiceExceptionHandler;
 import com.example.demo.util.HttpReqUtil;
 import com.example.demo.util.JWTUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.ThreadContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.util.AntPathMatcher;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -86,7 +86,13 @@ public class ServiceBeanFactory implements WebMvcConfigurer {
         String jwtStr = "";
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length > 0) {
-            jwtStr = cookies[0].getValue();
+            for (Cookie cookie : cookies) {
+                if (StringUtils.equals(cookie.getName(), TOKEN_HEADER)) {
+                    jwtStr = cookies[0].getValue();
+                    break;
+                }
+            }
+
         }
         if (StringUtils.isEmpty(jwtStr)) {
             jwtStr = request.getHeader(TOKEN_HEADER);
