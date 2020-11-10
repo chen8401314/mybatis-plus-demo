@@ -27,6 +27,7 @@ public class CodeGenerator {
         gc.setSwagger2(true);
         gc.setServiceName("%sService");
         gc.setEntityName("%sEntity");
+        gc.setMapperName("%sMapper");
         gc.setBaseResultMap(true);
         mpg.setGlobalConfig(gc);
 
@@ -105,7 +106,7 @@ public class CodeGenerator {
         // 写于父类中的公共字段
         //strategy.setSuperEntityColumns("id");
         // 需要生成的表
-        strategy.setInclude(new String[]{"pf_user","pf_test"});
+        strategy.setInclude(new String[]{"pf_test"});
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix("pf_");
         mpg.setStrategy(strategy);

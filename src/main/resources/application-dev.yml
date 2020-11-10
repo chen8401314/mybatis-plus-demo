@@ -28,12 +28,13 @@ mybatis-plus:
   configuration:
     cache-enabled: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
   global-config:
     db-config:
       #表名下划线命名默认true
       table-underline: true
       #id类型
       id-type: uuid
+  type-enums-package: com.example.demo.enumeration
 logging:
   config: classpath:logback-spring.xml
-

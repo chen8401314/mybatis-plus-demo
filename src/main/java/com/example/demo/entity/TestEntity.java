@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.example.demo.enumeration.StatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -43,11 +44,10 @@ public class TestEntity extends BaseEntity {
     @ApiModelProperty(value = "家庭住址")
     private String homeAddress;
 
-    @ApiModelProperty(value = "事件状态(-2事件未发布 -1关闭事件 0办理中 1事件结束)")
-    private String eventStatus;
-
     @ApiModelProperty(value = "是否结婚(1 是 0 否)")
     private Boolean isMarry;
 
+    @ApiModelProperty(value = "状态")
+    private StatusEnum status;
 
 }

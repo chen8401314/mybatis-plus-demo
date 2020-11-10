@@ -87,7 +87,13 @@ package ${package.Entity};
     <#if (logicDeleteFieldName!"") == field.name>
         @TableLogic
     </#if>
-    private ${field.propertyType} ${field.propertyName};
+<#-- 枚举写死 -->
+    <#if "status" == field.name>
+        private Status status;
+    <#else>
+        private ${field.propertyType} ${field.propertyName};
+    </#if>
+
 </#list>
 <#------------  END 字段循环遍历  ---------->
 
