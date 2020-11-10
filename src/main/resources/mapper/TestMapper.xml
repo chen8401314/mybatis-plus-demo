@@ -6,6 +6,9 @@
     <resultMap id="BaseResultMap" type="com.example.demo.entity.TestEntity">
         <id column="id" property="id" />
         <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_id" property="createId" />
+        <result column="update_id" property="updateId" />
         <result column="age" property="age" />
         <result column="birthday" property="birthday" />
         <result column="name" property="name" />

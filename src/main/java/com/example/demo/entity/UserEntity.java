@@ -2,11 +2,10 @@ package com.example.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -14,20 +13,20 @@ import java.io.Serializable;
  * </p>
  *
  * @author chenx
- * @since 2020-11-09
+ * @since 2020-11-10
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("pf_user")
 @ApiModel(value = "UserEntity对象", description = "")
-public class UserEntity implements Serializable {
+public class UserEntity extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
-    private String id;
-
+    @ApiModelProperty(value = "用户名")
     private String username;
 
+    @ApiModelProperty(value = "密码")
     private String password;
 
 

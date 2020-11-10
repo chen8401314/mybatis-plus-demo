@@ -22,7 +22,7 @@ public final class ThreadLocalContextAccessor {
     public static String getUserID() {
         ServiceContext context = getServiceContext();
         if (context == null) {
-            throw new RuntimeException("no user context bound to current thread");
+           return "";
         }
         return context.getUserID();
     }
@@ -30,7 +30,7 @@ public final class ThreadLocalContextAccessor {
     public static String getUserName() {
         ServiceContext context = getServiceContext();
         if (context == null) {
-            throw new RuntimeException("no user context bound to current thread");
+            return "";
         }
         return context.getUserName();
     }

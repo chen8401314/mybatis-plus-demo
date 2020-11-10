@@ -96,7 +96,8 @@ public class CodeGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        //strategy.setSuperEntityClass("com.baomidou.ant.common.BaseEntity");
+        strategy.setSuperEntityClass("com.example.demo.entity.BaseEntity");
+        strategy.setSuperEntityColumns("id", "create_time", "create_id", "update_time", "update_id");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         // 公共父类
@@ -104,7 +105,7 @@ public class CodeGenerator {
         // 写于父类中的公共字段
         //strategy.setSuperEntityColumns("id");
         // 需要生成的表
-        strategy.setInclude(new String[]{"pf_user"});
+        strategy.setInclude(new String[]{"pf_user","pf_test"});
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix("pf_");
         mpg.setStrategy(strategy);
