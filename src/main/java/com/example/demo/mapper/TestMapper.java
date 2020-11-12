@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.entity.TestEntity;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -16,6 +17,7 @@ import org.apache.ibatis.annotations.Select;
  * @author chenx
  * @since 2019-11-21
  */
+@Repository
 public interface TestMapper extends BaseMapper<TestEntity> {
 
 
