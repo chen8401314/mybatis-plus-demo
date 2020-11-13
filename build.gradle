@@ -1,8 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.1.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-	id 'net.ltgt.apt' version '0.9'
-	id 'java'
+    id 'org.springframework.boot' version '2.2.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'net.ltgt.apt' version '0.9'
+    id 'java'
 }
 
 group = 'com.example'
@@ -10,9 +10,9 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 apply plugin: 'net.ltgt.apt'
@@ -22,38 +22,46 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
 repositories {
-	mavenCentral()
-	maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-	maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    mavenCentral()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.baomidou:mybatis-plus-boot-starter:3.1.0'
-	implementation 'com.baomidou:mybatis-plus-generator:3.1.0'
-	implementation 'com.alibaba:druid:1.0.29'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.1.0'
+    implementation 'com.baomidou:mybatis-plus-generator:3.1.0'
+    implementation 'com.alibaba:druid:1.0.29'
 
-	implementation 'io.springfox:springfox-swagger2:2.6.1'
-	implementation 'io.springfox:springfox-swagger-ui:2.6.1'
-	implementation 'org.freemarker:freemarker:2.3.29'
-	implementation 'mysql:mysql-connector-java:8.0.18'
+    implementation group: 'com.google.guava', name: 'guava', version: 18.0, force: true
+
+    implementation('io.springfox:springfox-swagger2:2.6.1') {
+        exclude group: 'com.google.guava', module: 'guava'
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+        exclude group: 'com.fasterxml.jackson.core'
+        exclude group: 'org.mapstruct'
+    }
+    implementation 'io.springfox:springfox-swagger-ui:2.6.1'
+    implementation 'com.github.xiaoymin:swagger-bootstrap-ui:1.9.1'
+    implementation 'org.freemarker:freemarker:2.3.29'
+    implementation 'mysql:mysql-connector-java:8.0.18'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
-	implementation 'org.apache.logging.log4j:log4j-to-slf4j:2.10.0'
-	implementation 'org.slf4j:jul-to-slf4j:1.7.25'
-	implementation('io.jsonwebtoken:jjwt:0.9.1') {
-		exclude group: 'com.fasterxml.jackson.core'
-	}
-	implementation 'org.apache.commons:commons-collections4:4.2'
-	implementation 'org.apache.commons:commons-lang3:3.8.1'
-	implementation "javax.xml.bind:jaxb-api:2.3.0"
+    implementation 'org.apache.logging.log4j:log4j-to-slf4j:2.10.0'
+    implementation 'org.slf4j:jul-to-slf4j:1.7.25'
+    implementation('io.jsonwebtoken:jjwt:0.9.1') {
+        exclude group: 'com.fasterxml.jackson.core'
+    }
+    implementation 'org.apache.commons:commons-collections4:4.2'
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
+    implementation "javax.xml.bind:jaxb-api:2.3.0"
 
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
