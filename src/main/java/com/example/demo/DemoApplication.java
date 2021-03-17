@@ -9,7 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication sa = new SpringApplication(DemoApplication.class);
+		sa.setAllowBeanDefinitionOverriding(true);
+		sa.run(args);
 	}
 
 }

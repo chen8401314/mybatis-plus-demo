@@ -14,12 +14,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static com.example.demo.common.Response.DEFAULT_CODE_SUCCESS;
 
 /**
  * <p>
@@ -67,6 +67,14 @@ public class UserController {
             log.info(Throwables.getStackTraceAsString(e));
             return Response.failure(e.getMessage());
         }
+    }
+
+    @GetMapping(value = "/logout")
+    @ApiOperation(value = "用户登出")
+    public Response logout(HttpServletRequest request, HttpServletResponse response) {
+        // 暂时隐藏用户退出删除缓存操作
+        HttpReqUtil.setTokenCookies("", response);
+        return Response.success(DEFAULT_CODE_SUCCESS, "登出成功");
     }
 
 }
