@@ -138,4 +138,8 @@ public class Response<T> implements Serializable {
         return !this.isValid();
     }
 
+    public static <T> Response<T> failure(ExceptionEnum exceptionEnum) {
+        return new Response<>(exceptionEnum.getCode(), exceptionEnum.getMessage());
+    }
+
 }

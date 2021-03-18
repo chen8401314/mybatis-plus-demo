@@ -1,7 +1,10 @@
 package com.example.demo.handler;
 
+import com.example.demo.common.Consts;
+import com.example.demo.common.ExceptionEnum;
 import com.example.demo.common.Response;
 import com.example.demo.context.CommonException;
+import com.example.demo.context.NoLoginException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,5 +24,11 @@ public class CommonExceptionHandler {
         return Response.failure(e.getMessage());
     }
 
+
+    @ExceptionHandler(value = NoLoginException.class)
+    @ResponseBody
+    public Response exceptionGet(NoLoginException e) {
+        return Response.failure(ExceptionEnum.NOT_LOGIN);
+    }
 
 }

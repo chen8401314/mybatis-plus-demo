@@ -1,7 +1,6 @@
 package com.example.demo.util;
 
-import com.example.demo.common.ExceptionEnum;
-import com.example.demo.context.CommonException;
+import com.example.demo.context.NoLoginException;
 import com.example.demo.context.ServiceContext;
 import com.example.demo.context.ThreadLocalContextAccessor;
 import com.example.demo.context.UserToken;
@@ -72,7 +71,7 @@ public class JWTUtils {
             flag = parseToken(claimsJws).getBody() != null;
         } catch (Exception e) {
             log.warn("Error in validating token：{}", e.getMessage());
-            throw new CommonException(ExceptionEnum.NOT_LOGIN.getMessage());
+            throw new NoLoginException();
         }
         return flag;
     }
@@ -83,11 +82,11 @@ public class JWTUtils {
             claims = parseToken(claimsJws).getBody();
         } catch (Exception e) {
             log.warn("Error in validating token：{}", e.getMessage());
-            throw new CommonException(ExceptionEnum.NOT_LOGIN.getMessage());
+            throw new NoLoginException();
         }
 
         if (StringUtils.isEmpty(claims.getId())) {
-            throw new CommonException(ExceptionEnum.NOT_LOGIN.getMessage());
+            throw new NoLoginException();
         }
 
         UserToken.UserTokenBuilder builder = UserToken.builder();
@@ -124,6 +123,6 @@ public class JWTUtils {
     }
 
     public static void main(String[] args) {
-        log.info(createToken("0210dd81c50b35b0da0bc4144186a5d7","test",null, LocalDateTime.now().plusYears(1L), signatureAlgorithm256));
+        log.info(createToken("0210dd81c50b35b0da0bc4144186a5d7", "test", null, LocalDateTime.now().plusYears(1L), signatureAlgorithm256));
     }
 }
