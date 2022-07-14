@@ -88,7 +88,7 @@ public class ServiceBeanFactory implements WebMvcConfigurer {
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
                 if (StringUtils.equals(cookie.getName(), TOKEN_HEADER)) {
-                    jwtStr = cookies[0].getValue();
+                    jwtStr = cookie.getValue();
                     break;
                 }
             }

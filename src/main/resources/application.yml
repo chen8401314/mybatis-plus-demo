@@ -2,6 +2,18 @@ spring:
   profiles:
     active: dev
   application:
-    name: test
+    name: mybatis-test
+  boot:
+      admin:
+        client:
+          url: "http://localhost:8010" #定义client注册服务到8088端口
 logging:
   config: classpath:logback-spring.xml
+info: # 自定义属性及信息
+  code: test-mybatis
+  body: demo111
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #开放所有的接口监听
