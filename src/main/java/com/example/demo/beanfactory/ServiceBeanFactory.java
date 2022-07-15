@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -162,10 +163,19 @@ public class ServiceBeanFactory implements WebMvcConfigurer {
 
     }
 
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedHeaders("*").allowedMethods("*")
+                .maxAge(3600).allowedOrigins("*").allowCredentials(true)
+                .allowedMethods("GET","POST","PUT","DELETE","OPTIONS","HEAD");
+    }
+
     private void setServiceContext(ServiceContext sc) {
         ThreadContext.put(TRACE_ID_HEADER, sc.getTraceId());
         ThreadContext.put(USER_NAME, sc.getUserName());
         ThreadLocalContextAccessor.setServiceContext(sc);
     }
+
+
 
 }

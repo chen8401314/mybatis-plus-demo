@@ -75,6 +75,17 @@ public class TestController {
         return Response.success(testService.findPage(name,page));
     }
 
+    @ApiOperation(value = "test获取pagetest")
+    @GetMapping(value = "/anon/findPage")
+    public Response<IPage<TestEntity>> testFindPage(
+            @RequestParam(required = false) Integer pages,
+            @RequestParam(required = false) Integer size,
+            @RequestParam(required = false) String name
+    ) {
+        Page<TestEntity> page = new Page(pages,size);
+        return Response.success(testService.findPage(name,page));
+    }
+
     @ApiOperation(value = "获取pagetestDTO")
     @GetMapping(value = "/findPageDTO")
     public Response<IPage<TestDTO>> findPageDTO(

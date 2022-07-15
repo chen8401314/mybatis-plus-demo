@@ -1,14 +1,11 @@
 package com.example.demo.util;
 
-import com.example.demo.context.NoLoginException;
-import com.example.demo.context.ServiceContext;
-import com.example.demo.context.ThreadLocalContextAccessor;
-import com.example.demo.context.UserToken;
+import com.example.demo.context.*;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.DefaultClaims;
 import io.jsonwebtoken.impl.compression.DeflateCompressionCodec;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -71,22 +68,25 @@ public class JWTUtils {
             flag = parseToken(claimsJws).getBody() != null;
         } catch (Exception e) {
             log.warn("Error in validating token：{}", e.getMessage());
-            throw new NoLoginException();
+            throw new CommonException(401, "Please login", e, 401);
         }
         return flag;
     }
 
     public static UserToken extractToken(String claimsJws) {
+        if(StringUtils.isEmpty(claimsJws)){
+            throw new CommonException(401, "Please login", 401);
+        }
         Claims claims;
         try {
             claims = parseToken(claimsJws).getBody();
         } catch (Exception e) {
             log.warn("Error in validating token：{}", e.getMessage());
-            throw new NoLoginException();
+            throw new CommonException(401, "Please login", 401);
         }
 
         if (StringUtils.isEmpty(claims.getId())) {
-            throw new NoLoginException();
+            throw new CommonException(401, "Please login", 401);
         }
 
         UserToken.UserTokenBuilder builder = UserToken.builder();
