@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.UserEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -14,4 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface UserService extends IService<UserEntity> {
 
     UserEntity findByUsername(String username);
+
+    UserDTO findById(String id);
 }

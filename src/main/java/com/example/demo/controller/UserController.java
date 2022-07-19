@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 
 import com.example.demo.common.Response;
+import com.example.demo.context.ThreadLocalContextAccessor;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.request.LoginReq;
 import com.example.demo.service.UserService;
@@ -75,6 +77,12 @@ public class UserController {
         // 暂时隐藏用户退出删除缓存操作
         HttpReqUtil.setTokenCookies("", response);
         return Response.success(DEFAULT_CODE_SUCCESS, "登出成功");
+    }
+
+    @GetMapping(value = "/getUserInfo")
+    @ApiOperation(value = "获取登录用户信息")
+    public Response<UserDTO> getUserInfo() {
+        return Response.success(userService.findById(ThreadLocalContextAccessor.getUserID()));
     }
 
 }
