@@ -29,12 +29,13 @@
     </select>
 
     <select id="findPageDTO" resultType="com.example.demo.dto.TestDTO">
-        SELECT id,name,is_marry FROM pf_test
+        SELECT * FROM pf_test
         <where>
             <if test="name!=null and name!=''">
-                AND name = #{name}
+                AND name like concat('%', #{name}, '%')
             </if>
         </where>
+        order by create_time desc
     </select>
 
 </mapper>

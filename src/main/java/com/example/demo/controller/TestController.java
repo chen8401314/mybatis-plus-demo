@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author chenx
@@ -49,8 +49,8 @@ public class TestController {
             @RequestParam(required = false) Integer size,
             @RequestParam(required = false) String name
     ) {
-        Page<TestEntity> page = new Page(pages,size);
-        return Response.success(testService.selectPage(name,page));
+        Page<TestEntity> page = new Page(pages, size);
+        return Response.success(testService.selectPage(name, page));
     }
 
     @ApiOperation(value = "获取pagetest")
@@ -60,8 +60,8 @@ public class TestController {
             @RequestParam(required = false) Integer size,
             @RequestParam(required = false) String name
     ) {
-        Page<TestDTO> page = new Page(pages,size);
-        return Response.success(testService.selectPage1(name,page));
+        Page<TestDTO> page = new Page(pages, size);
+        return Response.success(testService.selectPage1(name, page));
     }
 
     @ApiOperation(value = "获取pagetest")
@@ -71,20 +71,9 @@ public class TestController {
             @RequestParam(required = false) Integer size,
             @RequestParam(required = false) String name
     ) {
-        Page<TestEntity> page = new Page(pages,size);
-        return Response.success(testService.findPage(name,page));
+        return Response.success(testService.findPage(name, new Page(pages, size)));
     }
 
-    @ApiOperation(value = "test获取pagetest")
-    @GetMapping(value = "/anon/findPage")
-    public Response<IPage<TestEntity>> testFindPage(
-            @RequestParam(required = false) Integer pages,
-            @RequestParam(required = false) Integer size,
-            @RequestParam(required = false) String name
-    ) {
-        Page<TestEntity> page = new Page(pages,size);
-        return Response.success(testService.findPage(name,page));
-    }
 
     @ApiOperation(value = "获取pagetestDTO")
     @GetMapping(value = "/findPageDTO")
@@ -93,7 +82,6 @@ public class TestController {
             @RequestParam(required = false) Integer size,
             @RequestParam(required = false) String name
     ) {
-        Page<TestEntity> page = new Page(pages,size);
-        return Response.success(testService.findPageDTO(name,page));
+        return Response.success(testService.findPageDTO(name, new Page(pages, size)));
     }
 }
