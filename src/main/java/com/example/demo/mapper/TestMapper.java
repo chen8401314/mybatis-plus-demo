@@ -27,4 +27,7 @@ public interface TestMapper extends BaseMapper<TestEntity> {
 
     @Select("SELECT * FROM pf_test WHERE name like '%${name}%'")
     IPage<TestDTO> selectPage1(Page<TestDTO> page,@Param("name") String name);
+
+    @Select("SELECT * FROM pf_test WHERE id = '${id}'")
+    TestDTO findById(@Param("id") String id);
 }

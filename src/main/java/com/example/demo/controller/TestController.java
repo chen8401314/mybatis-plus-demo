@@ -6,13 +6,17 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.common.Response;
 import com.example.demo.dto.TestDTO;
 import com.example.demo.entity.TestEntity;
+import com.example.demo.request.TestReq;
 import com.example.demo.service.TestService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.example.demo.structs.TestMap.TEST_MAPPER;
 
 /**
  * <p>
@@ -29,10 +33,11 @@ public class TestController {
     @Autowired
     private TestService testService;
 
-    @ApiOperation(value = "保存test")
+    @ApiOperation(value = "保存或编辑test")
     @PostMapping(value = "/save")
-    public Response<String> save(@RequestBody TestEntity test) {
-        testService.save(test);
+    public Response<String> save(@RequestBody TestReq req) {
+        TestEntity testEntity = TEST_MAPPER.toEntity(req);
+        testService.saveOrUpdate(testEntity);
         return Response.success();
     }
 
@@ -40,6 +45,19 @@ public class TestController {
     @GetMapping(value = "/findAll")
     public Response<List<TestEntity>> findAll() {
         return Response.success(testService.list());
+    }
+
+    @ApiOperation(value = "获取id删除")
+    @DeleteMapping(value = "/delById")
+    public Response<Void> delById(@RequestParam String id) {
+        testService.removeById(id);
+        return Response.success();
+    }
+
+    @ApiOperation(value = "获取test通过ID")
+    @GetMapping(value = "/findById")
+    public Response<TestDTO> selectPage(@RequestParam String id) {
+        return Response.success(testService.findById(id));
     }
 
     @ApiOperation(value = "获取pagetest")

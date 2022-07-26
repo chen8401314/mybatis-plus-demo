@@ -1,7 +1,6 @@
 package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.enums.SqlLike;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -35,6 +34,11 @@ public class TestServiceImpl extends ServiceImpl<TestMapper, TestEntity> impleme
     @Override
     public IPage<TestDTO> findPageDTO(String name,Page<TestEntity> page) {
         return testMapper.findPageDTO(page,name);
+    }
+
+    @Override
+    public TestDTO findById(String id) {
+        return testMapper.findById(id);
     }
 
     @Override

@@ -46,7 +46,7 @@ dependencies {
         exclude group: "com.google.guava", module: "guava"
         exclude group: "org.slf4j", module: "slf4j-api"
         exclude group: "com.fasterxml.jackson.core"
-        exclude group: "org.mapstruct"
+      //  exclude group: "org.mapstruct"
     }
     implementation "io.springfox:springfox-swagger-ui:${swaggerVersion}"
     implementation "com.github.xiaoymin:swagger-bootstrap-ui:${swaggerUiVersion}"
@@ -61,7 +61,8 @@ dependencies {
     implementation "org.apache.commons:commons-collections4:${commonsCollections4Version}"
     implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
     implementation "javax.xml.bind:jaxb-api:${jaxbVersion}"
-
+    implementation "org.mapstruct:mapstruct:${mapperStructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapperStructVersion}"
     implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
     implementation "de.codecentric:spring-boot-admin-starter-client:2.2.0"
 

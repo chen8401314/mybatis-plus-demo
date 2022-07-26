@@ -17,7 +17,9 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TestService extends IService<TestEntity> {
 
-    IPage<TestEntity> selectPage(String name,Page<TestEntity> page);
+    TestDTO findById(String id);
+
+    IPage<TestEntity> selectPage(String name, Page<TestEntity> page);
 
     IPage<TestEntity> findPage(String name,Page<TestEntity> page);
 
