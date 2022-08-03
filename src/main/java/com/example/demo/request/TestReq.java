@@ -33,6 +33,9 @@ public class TestReq {
     @ApiModelProperty(value = "是否结婚(1 是 0 否)")
     private Boolean isMarry;
 
+    @ApiModelProperty(value = "照片")
+    private String photo;
+
     @ApiModelProperty(value = "状态")
     private StatusEnum status;
 }

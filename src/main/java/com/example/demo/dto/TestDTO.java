@@ -30,6 +30,9 @@ public class TestDTO {
     @ApiModelProperty(value = "家庭住址")
     private String homeAddress;
 
+    @ApiModelProperty(value = "照片")
+    private String photo;
+
     @ApiModelProperty(value = "是否结婚(1 是 0 否)")
     private Boolean isMarry;
 

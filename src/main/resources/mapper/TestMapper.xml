@@ -17,6 +17,7 @@
         <result column="home_address" property="homeAddress"/>
         <result column="is_marry" property="isMarry"/>
         <result column="status" property="status"/>
+        <result column="photo" property="photo"/>
     </resultMap>
 
     <select id="findPage" resultType="com.example.demo.entity.TestEntity">

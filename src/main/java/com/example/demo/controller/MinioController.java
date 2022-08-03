@@ -37,7 +37,7 @@ public class MinioController {
     private MinIOTemplate minIOTemplate;
 
     @ApiOperation(value = "上传文件")
-    @PostMapping(value = "/uploadFile")
+    @PostMapping(value = "/anon/uploadFile")
     public Response<FileDTO> save(@RequestParam("file") MultipartFile file) {
         try {
             return Response.success(minIOTemplate.uploadFile("", file.getOriginalFilename(), file.getInputStream()));
