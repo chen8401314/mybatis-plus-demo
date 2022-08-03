@@ -36,5 +36,12 @@ mybatis-plus:
       #id类型
       id-type: uuid
   type-enums-package: com.example.demo.enumeration
+minio:
+  accessKey: admin
+  secretKey: admin123
+  bucket: test
+  endpoint: http://192.168.5.78:9000
+  readPath: http://192.168.5.78:9000
+  enable: true
 logging:
   config: classpath:logback-spring.xml
