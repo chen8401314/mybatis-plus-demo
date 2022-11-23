@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,18 +18,26 @@ import lombok.experimental.Accessors;
  * @since 2020-11-10
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("pf_user")
-@ApiModel(value = "UserEntity对象", description = "")
-public class UserEntity extends BaseEntity {
+@ApiModel(value = "UserEntity对象")
+public class UserEntity{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户名")
+    /**
+     * id
+     */
+    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    private String id;
+
+    /**
+     * 用户名
+     */
     private String username;
 
-    @ApiModelProperty(value = "密码")
+    /**
+     * 密码
+     */
     private String password;
-
 
 }

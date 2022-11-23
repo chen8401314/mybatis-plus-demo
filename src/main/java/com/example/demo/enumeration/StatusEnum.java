@@ -1,44 +1,23 @@
 package com.example.demo.enumeration;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
-import com.baomidou.mybatisplus.core.enums.IEnum;
-import com.example.demo.context.BaseEnumDeserializer;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 @Getter
-@JsonDeserialize(using = BaseEnumDeserializer.class)
-public enum StatusEnum implements IEnum<Integer> {
+@AllArgsConstructor
+public enum StatusEnum {
     /**
      *
      */
-    VALID(1,"可用"),
-    INVALID(0,"不可用");
-    @EnumValue
-    private  Integer value;
-    private  String msg;
+    VALID("可用"),
+    INVALID("不可用");
 
-    StatusEnum(Integer value, String msg) {
-        this.value = value;
-        this.msg = msg;
-    }
-
-    @JsonCreator
-    public static StatusEnum fromValue(Integer value) {
-        for (StatusEnum s : StatusEnum.values()) {
-            if (s.value.equals(value)) {
-                return s;
-            }
-        }
-        return VALID;
-    }
+    private String desc;
 
     @Override
-    public Integer getValue() {
-        return this.value;
+    public String toString() {
+        return this.name() + "-" + desc;
     }
+
 
 }

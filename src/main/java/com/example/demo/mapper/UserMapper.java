@@ -1,11 +1,9 @@
 package com.example.demo.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.UserEntity;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -15,8 +13,12 @@ import org.springframework.stereotype.Repository;
  * @author chenx
  * @since 2020-11-09
  */
-@Repository
+@Mapper
 public interface UserMapper extends BaseMapper<UserEntity> {
-    @Select("SELECT * FROM pf_user WHERE id = '${id}'")
-    UserDTO findById(@Param("id") String id);
+
+    default UserEntity findByUsername(String username) {
+        LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(UserEntity::getUsername, username);
+        return selectOne(queryWrapper);
+    }
 }

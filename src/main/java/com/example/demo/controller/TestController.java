@@ -8,15 +8,17 @@ import com.example.demo.dto.TestDTO;
 import com.example.demo.entity.TestEntity;
 import com.example.demo.request.TestReq;
 import com.example.demo.service.TestService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-import static com.example.demo.structs.TestMap.TEST_MAPPER;
+import static com.example.demo.convert.TestConvert.TEST_CONVERT;
 
 /**
  * <p>
@@ -29,14 +31,16 @@ import static com.example.demo.structs.TestMap.TEST_MAPPER;
 @RestController
 @RequestMapping("/test")
 @Slf4j
+@Api(tags = "测试管理接口")
+@RequiredArgsConstructor
 public class TestController {
-    @Autowired
-    private TestService testService;
+
+    private  final TestService testService;
 
     @ApiOperation(value = "保存或编辑test")
     @PostMapping(value = "/save")
     public Response<String> save(@RequestBody TestReq req) {
-        TestEntity testEntity = TEST_MAPPER.toEntity(req);
+        TestEntity testEntity = TEST_CONVERT.toEntity(req);
         testService.saveOrUpdate(testEntity);
         return Response.success();
     }
@@ -62,7 +66,7 @@ public class TestController {
 
     @ApiOperation(value = "获取pagetest")
     @GetMapping(value = "/selectPage")
-    public Response<IPage<TestEntity>> selectPage(
+    public Response<Page<TestDTO>> selectPage(
             @RequestParam(required = false) Integer pages,
             @RequestParam(required = false) Integer size,
             @RequestParam(required = false) String name

@@ -1,5 +1,9 @@
 package com.example.demo.beanfactory;
 
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.example.demo.config.MinIOProperties;
 import com.example.demo.config.MinIOTemplate;
 import com.example.demo.context.ServiceContext;
@@ -202,5 +206,13 @@ public class ServiceBeanFactory implements WebMvcConfigurer {
     public MinIOTemplate minIOTemplate(MinIOProperties minIOProperties) {
         return new MinIOTemplate( minIOProperties);
     }
+
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        return interceptor;
+    }
+
 
 }

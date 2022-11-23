@@ -11,13 +11,16 @@ import com.example.demo.util.HttpReqUtil;
 import com.example.demo.util.JWTUtils;
 import com.example.demo.util.SecurityUtil;
 import com.google.common.base.Throwables;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,10 +37,11 @@ import static com.example.demo.common.Response.DEFAULT_CODE_SUCCESS;
 @RestController
 @RequestMapping("/user")
 @Slf4j
+@Api(tags = "用户管理接口")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @ApiOperation(value = "保存user")
     @PostMapping(value = "/save")

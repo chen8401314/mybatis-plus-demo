@@ -1,17 +1,34 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   profiles:
     active: dev
   application:
     name: mybatis-test
-  boot:
-      admin:
-        client:
-          url: "http://localhost:8010" #定义client注册服务到8088端口
 logging:
   config: classpath:logback-spring.xml
 info: # 自定义属性及信息
   code: test-mybatis
   body: demo111
+mybatis-plus:
+  typeAliasesPackage: com.example.demo.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    lazy-loading-enabled: true
+    use-column-label: true
+    call-setters-on-nulls: true
+    multiple-result-sets-enabled: true
+    map-underscore-to-camel-case: true
+    default-executor-type: reuse
+    default-statement-timeout: 25000
+  global-config:
+    db-config:
+      #表名下划线命名默认true
+      table-underline: true
+      #id类型
+      id-type: assign_uuid
+  type-enums-package: com.example.demo.enumeration
 management:
   endpoints:
     web:

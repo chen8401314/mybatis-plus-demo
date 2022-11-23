@@ -3,15 +3,12 @@ package com.example.demo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-@SpringBootApplication(scanBasePackages = {"com.example.demo"})
-@MapperScan("com.example.demo.mapper")
+@SpringBootApplication
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication sa = new SpringApplication(DemoApplication.class);
-		sa.setAllowBeanDefinitionOverriding(true);
-		sa.run(args);
+		SpringApplication.run(DemoApplication.class, args);
 	}
-
 }
