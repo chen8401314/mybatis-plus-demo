@@ -50,7 +50,7 @@ public class CodeGenerator {
                                 .mapper("repository")
                                 .pathInfo(
                                         new HashMap<OutputFile,String>(8){{
-                                            put(OutputFile.mapperXml,System.getProperty("user.dir") + "/mybatis-plus-demo/src/main/resources/mapper");
+                                            put(OutputFile.mapper,System.getProperty("user.dir") + "/mybatis-plus-demo/src/main/resources/mapper");
                                         }}
                                 ); // 设置mapperXml生成路径
                     })
