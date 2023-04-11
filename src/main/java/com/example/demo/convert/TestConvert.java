@@ -20,6 +20,8 @@ public interface TestConvert {
 
     TestEntity toEntity(TestReq req);
 
+    TestDTO toDTO(TestEntity entity);
+
     Page<TestDTO> toPageDTO(IPage<TestEntity> page);
 
 }
