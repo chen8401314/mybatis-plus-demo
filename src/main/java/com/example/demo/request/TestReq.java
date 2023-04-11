@@ -4,6 +4,7 @@ import com.example.demo.enumeration.StatusEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Data
@@ -19,6 +20,7 @@ public class TestReq {
     private LocalDate birthday;
 
     @ApiModelProperty(value = "名字")
+    @NotBlank
     private String name;
 
     @ApiModelProperty(value = "性别")

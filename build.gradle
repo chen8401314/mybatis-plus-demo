@@ -7,13 +7,6 @@ plugins {
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
-
 repositories {
     maven {url 'https://maven.aliyun.com/repository/public/'}
     maven {url 'https://maven.aliyun.com/repository/spring/'}
@@ -56,15 +49,19 @@ dependencies {
     implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
     implementation "javax.xml.bind:jaxb-api:${jaxbVersion}"
     implementation "org.mapstruct:mapstruct:${mapperStructVersion}"
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapperStructVersion}"
+
     implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
     implementation "de.codecentric:spring-boot-admin-starter-client:${springBootVersion}"
     implementation "io.minio:minio:${minioVersion}"
     implementation "cn.hutool:hutool-core:${hutoolVersion}"
 
 
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude group: "org.junit.vintage", module: "junit-vintage-engine"
     }
